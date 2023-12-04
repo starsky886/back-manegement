@@ -13,13 +13,9 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    // do something before request is sent
-
-    if (store.getters.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+    const token = localStorage.getItem('adminToken')
+    if (token) {
+      config.headers['Authorization'] = 'Bearer ' + token
     }
     return config
   },
@@ -46,7 +42,7 @@ service.interceptors.response.use(
     // 响应拦截
     if (response.headers.authentication) {
       // 当有token信息时，需要存到本地，后面的每次请求都需要用到token信息
-      localStorage.setItem('authentication',response.headers.authentication)
+      localStorage.setItem('adminToken',response.headers.authentication)
     }
     return response.data
 
