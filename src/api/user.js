@@ -22,3 +22,12 @@ export function logoutApi() {
     method: 'post'
   })
 }
+
+// 修改用户
+export function setUser(data){
+  return request({
+    url : '/api/admin',
+    method : 'PUT',
+    data
+  })
+}
