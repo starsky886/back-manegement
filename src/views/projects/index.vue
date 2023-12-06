@@ -37,8 +37,8 @@
           <template slot-scope="scope">
             <el-image
               style="width: 120px"
-              :src="scope.row.thumb2"
-              :preview-src-list="srcList"
+              :src="scope.row.thumb"
+              :preview-src-list="data"
             >
             </el-image>
           </template>
@@ -166,7 +166,6 @@
       return {
         data: [], // 存储数据
         listLoading: false,
-        srcList: [],
         dialogFormVisible: false, // 一开始编辑对话框不可见
         form: {
           name: "",
@@ -190,11 +189,6 @@
         getProject().then(({ data }) => {
           this.listLoading = false;
           this.data = data;
-          console.log(data);
-          for (let i of this.data) {
-            i.thumb2 = server_URL + i.thumb;
-            this.srcList.push(i.thumb2);
-          }
         });
       },
       openGitHubHandle(projectInfo) {

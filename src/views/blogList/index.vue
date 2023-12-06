@@ -18,7 +18,7 @@
                 style="width: 200px"
                 :src="scope.row.thumb"
                 fit="contain"
-                :preview-src-list="srcList"
+                :preview-src-list="data"
               ></el-image>
               <a
                 href="#"
@@ -130,8 +130,7 @@
           this.data = data.rows;
           for (var i of this.data) {
             i.createDate = formatDate(i.createDate);
-            i.thumb = server_URL + i.thumb;
-            this.srcList.push(i.thumb);
+           
           }
           this.count = data.total;
           this.totalPage = Math.ceil(this.count / this.eachPage);
